@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Game from './GameFx.js';
+import {Clock,Clockclass } from './Playground';
 
 function App() {
   return (
@@ -19,8 +20,10 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <div>hello</div>
-       <Game />
+      {/* <div>hello</div>
+       <Game /> */}
+       {/* <Clock date={new Date()}/> */}
+       <Clockclass ></Clockclass>
     </div>
   );
 }
