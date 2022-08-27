@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Game from './Game.js';
+import Game from './GameFx.js';
 
 function App() {
   return (
