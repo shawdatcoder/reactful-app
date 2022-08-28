@@ -117,18 +117,40 @@ import { ReactDOM } from "react";
 
 function ShowOutcomes(){
 
-   let items = [['barca', 'real'], ['city'], ['united', 'liv']];
+
+   let items =  [
+    
+    ['Team A', 'Team B'],
+     ['Team C', 'Team D'], 
+     ['Team E', 'Team F' ], 
+     ['Team G', 'Team H'],
+     ['CHELSEA'],
+     ['BARCELONA'], 
+     ['REAL'], 
+     ['CITY'], 
+     ['BAYERN'], 
+     ['LIVERPOOL'], 
+     ['ARSENAL'],
+     ['SPURS'] 
+
+
+
+];
+   
    let items2 =  getItemsToUpper(items);
    
    let outcomes = GetOutcomes(items2).map(c=> c + " ");
+ 
+
    const divStyle = {
     color: 'blue',
     border: '1px',
   };
    
-return (outcomes.map(element => {
+return ( 
+ outcomes.map(element => {
     return( 
-    <div key={element[0]} className="outcome" style={divStyle}>{element}</div>   
+    <div className="outcome" style={divStyle}>{element}</div>   
     )
 
 }
@@ -150,5 +172,17 @@ function GetOutcomes(items) {
 
 }
 
+function GetCount() {
+    let count = 0;
+    let outcomes = document.querySelectorAll(".outcome");
+    count = outcomes.length;
 
-export {ShowOutcomes}
+    return (
+
+        <div>Count is {count}</div>
+
+    )
+    
+}
+
+export {ShowOutcomes, GetCount}

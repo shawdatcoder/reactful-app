@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Game from './GameFx.js';
 import {Clock,Clockclass } from './Playground';
-import {ShowOutcomes} from './GambleHelper';
+import {GetCount, ShowOutcomes} from './GambleHelper';
 
 function App() {
   return (
@@ -25,7 +25,8 @@ function App() {
        <Game /> */}
        {/* <Clock date={new Date()}/> */}
        <Clockclass ></Clockclass>
-       <ShowOutcomes/>
+       <GetCount/>
+       <ShowOutcomes />
     </div>
   );
 }
