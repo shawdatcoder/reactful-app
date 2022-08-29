@@ -1,0 +1,7 @@
+.outcome {
+        border: solid 2px #282c34 !important;
+            border-radius: 5px;
+            padding: 1em;
+            margin: 1em;
+            overflow-wrap: break-word;
+}

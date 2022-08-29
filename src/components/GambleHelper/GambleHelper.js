@@ -1,5 +1,6 @@
 import React from 'react'
 import { ReactDOM, useState } from 'react'
+import './GambleHelper.css'
 
 function ShowOutcomes() {
     /*
@@ -88,26 +89,7 @@ function GetOutcomes(items) {
     return result
 }
 
-class GetCount extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            count: 0,
-        }
-    }
-
-    render() {
-        return <div>Count is {this.state.count}</div>
-    }
-
-    componentDidMount() {
-        let outcomes = document.querySelectorAll('.outcome')
-        let count = outcomes.length
-        this.setState({ count: count })
-    }
-}
-
-export { ShowOutcomes, GetCount }
+export { ShowOutcomes }
 
 // function GambleGame(){
 
