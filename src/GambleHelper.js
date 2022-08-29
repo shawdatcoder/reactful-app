@@ -1,5 +1,146 @@
 import React from "react";
-import { ReactDOM } from "react";
+import { ReactDOM, useState } from "react";
+
+
+function ShowOutcomes(){
+/*
+on 10 Team Parley:
+Draws - Count of Bets
+0 -   8
+1 -  12   
+2 -  18
+3 -  27
+*/
+   let items =  [
+  
+
+    ['BRGTON', 'FULLHAM'],
+                     ['LC', 'MANUTD'],
+     ['SOUTHAMP', 'CHELSEA'],
+     ['PSG'] ,
+     ['REALMADRID'], 
+     ['CITY'], 
+     ['BAYERN'], 
+     ['LIV'], 
+     ['ARSENAL'],
+     ['SPURS'] 
+
+
+
+];
+
+const changeState = (e) => {
+    console.log("from parent");
+    console.log(e);
+
+  }
+   
+   let items2 =  getItemsToUpper(items);
+   
+   let outcomes = GetOutcomes(items2).map(c=> c + " ");
+ 
+
+   
+return ( 
+ outcomes.map((element, key=0) => {
+    key++;
+    return( 
+       
+    <Outcome key={key} iden={key} changeStateFromChild={changeState} element={element}/>   
+    )
+                             }
+));   }
+
+
+function  Outcome(props){
+
+    const [data,updateState] = useState({clicked: false, class : "bg-white"});
+
+   
+
+     const processState = (data)=> {
+        
+        var clickAction = (!data.clicked) ? true : false;
+        var clickActionBG = (clickAction) ? "bg-green" : "bg-white";
+        var result = { 
+            clicked : clickAction,
+            class : clickActionBG
+        };
+        return result;
+
+     }
+      
+     const onClick = (e) => {
+
+        console.log("from child:")
+        props.changeStateFromChild(e)
+        let r = processState(data);
+        updateState( r )
+
+      }
+
+    return( 
+        <div className={"outcome " + data.class} id={"outcome"+props.iden} onClick={onClick}>{props.element}</div>   
+        )    
+}
+
+function getItemsToUpper(items = []) {
+    var result =     (items).map((i) => i.map(j => j.toUpperCase()));
+return result;     
+}
+
+
+function GetOutcomes(items) {
+    let result = items.reduce((a, b) => a.reduce((r, v) => r.concat(b.map(w => [].concat(v, w))), []));
+    return result;
+
+}
+
+class GetCount extends React.Component {
+   constructor(props){
+    super(props);
+    this.state = {
+        count: 0,
+    };                     }
+   
+
+
+    render(){
+
+        return (
+        <div>Count is {this.state.count}</div>
+         )
+        }
+
+        componentDidMount(){
+            let outcomes = document.querySelectorAll(".outcome");
+            let  count = outcomes.length;
+            this.setState({count : count})
+        }
+
+
+
+
+    
+    
+}
+
+setInterval(GetCount, 1000);
+
+
+export {ShowOutcomes, GetCount}
+
+
+
+
+
+
+
+
+
+
+
+
 
 // function GambleGame(){
 
@@ -114,89 +255,3 @@ import { ReactDOM } from "react";
 
 //     //If single team selected or nothing seldected
 // }
-
-function ShowOutcomes(){
-/*
-on 10 Team Parley:
-Draws - Count of Bets
-0 -   8
-1 -  12   
-2 -  18
-3 -  27
-*/
-   let items =  [
-    
-    ['BRGTON', 'FULLHAM'],
-    ['LC', 'MANUTD'],
-     ['SOUTHAMP', 'CHELSEA'],
-     ['PSG'] ,
-     ['REALMADRID'], 
-     ['CITY'], 
-     ['BAYERN'], 
-     ['LIV'], 
-     ['ARSENAL'],
-     ['SPURS'] 
-
-
-
-];
-
-const changeState = (e) => {
-    console.log(e);
-  }
-   
-   let items2 =  getItemsToUpper(items);
-   
-   let outcomes = GetOutcomes(items2).map(c=> c + " ");
- 
-
-   
-return ( 
- outcomes.map((element) => {
-
-    return( 
-       
-    <Outcome changeState={changeState} element={element}/>   
-    )
-}
-));
-}
-
-
-function  Outcome(props){
-
-      const onClick = (e) => {
-        props.changeState(e)
-      }
-    return( 
-        <div className="outcome" onClick={onClick}>{props.element}</div>   
-        )    
-}
-
-function getItemsToUpper(items = []) {
-    var result =     (items).map((i) => i.map(j => j.toUpperCase()));
-return result;     
-}
-
-
-function GetOutcomes(items) {
-    let result = items.reduce((a, b) => a.reduce((r, v) => r.concat(b.map(w => [].concat(v, w))), []));
-    return result;
-
-}
-
-function GetCount() {
-    let count = 0;
-    let outcomes = document.querySelectorAll(".outcome");
-    count = outcomes.length;
-
-    return (
-        <div>Count is {count}</div>
-    )
-    
-}
-
-setInterval(GetCount, 1000);
-
-
-export {ShowOutcomes, GetCount}
