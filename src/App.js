@@ -5,6 +5,10 @@ import {Clock,Clockclass } from './Playground';
 import {GetCount, ShowOutcomes} from './GambleHelper';
 
 function App() {
+
+
+
+
   return (
     <div className="App">
       {/* <header className="App-header">
@@ -25,10 +29,11 @@ function App() {
        <Game /> */}
        {/* <Clock date={new Date()}/> */}
        <Clockclass ></Clockclass>
-       <GetCount/>
+       <GetCount />
        <ShowOutcomes />
     </div>
   );
 }
+
 
 export default App;
