@@ -116,49 +116,62 @@ import { ReactDOM } from "react";
 // }
 
 function ShowOutcomes(){
-
-
+/*
+on 10 Team Parley:
+Draws - Count of Bets
+0 -   8
+1 -  12   
+2 -  18
+3 -  27
+*/
    let items =  [
     
-    ['Team A', 'Team B'],
-     ['Team C', 'Team D'], 
-     ['Team E', 'Team F' ], 
-     ['Team G', 'Team H'],
-     ['CHELSEA'],
-     ['BARCELONA'], 
-     ['REAL'], 
+    ['BRGTON', 'FULLHAM'],
+    ['LC', 'MANUTD'],
+     ['SOUTHAMP', 'CHELSEA'],
+     ['PSG'] ,
+     ['REALMADRID'], 
      ['CITY'], 
      ['BAYERN'], 
-     ['LIVERPOOL'], 
+     ['LIV'], 
      ['ARSENAL'],
      ['SPURS'] 
 
 
 
 ];
+
+const changeState = (e) => {
+    console.log(e);
+  }
    
    let items2 =  getItemsToUpper(items);
    
    let outcomes = GetOutcomes(items2).map(c=> c + " ");
  
 
-   const divStyle = {
-    color: 'blue',
-    border: '1px',
-  };
    
 return ( 
- outcomes.map(element => {
-    return( 
-    <div className="outcome" style={divStyle}>{element}</div>   
-    )
+ outcomes.map((element) => {
 
+    return( 
+       
+    <Outcome changeState={changeState} element={element}/>   
+    )
 }
 ));
-    
-
 }
 
+
+function  Outcome(props){
+
+      const onClick = (e) => {
+        props.changeState(e)
+      }
+    return( 
+        <div className="outcome" onClick={onClick}>{props.element}</div>   
+        )    
+}
 
 function getItemsToUpper(items = []) {
     var result =     (items).map((i) => i.map(j => j.toUpperCase()));
@@ -178,11 +191,12 @@ function GetCount() {
     count = outcomes.length;
 
     return (
-
         <div>Count is {count}</div>
-
     )
     
 }
+
+setInterval(GetCount, 1000);
+
 
 export {ShowOutcomes, GetCount}
