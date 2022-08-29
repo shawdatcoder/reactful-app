@@ -1,9 +1,8 @@
-import React from "react";
-import { ReactDOM, useState } from "react";
+import React from 'react'
+import { ReactDOM, useState } from 'react'
 
-
-function ShowOutcomes(){
-/*
+function ShowOutcomes() {
+    /*
 on 10 Team Parley:
 Draws - Count of Bets
 0 -   8
@@ -11,136 +10,104 @@ Draws - Count of Bets
 2 -  18
 3 -  27
 */
-   let items =  [
-  
+    let items = [
+        ['BRGTON', 'FULLHAM'],
+        ['LC', 'MANUTD'],
+        ['SOUTHAMP', 'CHELSEA'],
+        ['PSG'],
+        ['REALMADRID'],
+        ['CITY'],
+        ['BAYERN'],
+        ['LIV'],
+        ['ARSENAL'],
+        ['SPURS'],
+    ]
 
-    ['BRGTON', 'FULLHAM'],
-                     ['LC', 'MANUTD'],
-     ['SOUTHAMP', 'CHELSEA'],
-     ['PSG'] ,
-     ['REALMADRID'], 
-     ['CITY'], 
-     ['BAYERN'], 
-     ['LIV'], 
-     ['ARSENAL'],
-     ['SPURS'] 
+    const changeState = (e) => {
+        console.log('from parent')
+        console.log(e)
+    }
 
+    let items2 = getItemsToUpper(items)
 
+    let outcomes = GetOutcomes(items2).map((c) => c + ' ')
 
-];
+    return outcomes.map((element, key = 0) => {
+        key++
+        return (
+            <Outcome
+                key={key}
+                iden={key}
+                changeStateFromChild={changeState}
+                element={element}
+            />
+        )
+    })
+}
 
-const changeState = (e) => {
-    console.log("from parent");
-    console.log(e);
+function Outcome(props) {
+    const [data, updateState] = useState({ clicked: false, class: 'bg-white' })
 
-  }
-   
-   let items2 =  getItemsToUpper(items);
-   
-   let outcomes = GetOutcomes(items2).map(c=> c + " ");
- 
+    const processState = (dat) => {
+        var clickAction = !dat.clicked ? true : false
+        var clickActionBG = clickAction ? 'bg-green' : 'bg-white'
+        var result = {
+            clicked: clickAction,
+            class: clickActionBG,
+        }
+        return result
+    }
 
-   
-return ( 
- outcomes.map((element, key=0) => {
-    key++;
-    return( 
-       
-    <Outcome key={key} iden={key} changeStateFromChild={changeState} element={element}/>   
-    )
-                             }
-));   }
-
-
-function  Outcome(props){
-
-    const [data,updateState] = useState({clicked: false, class : "bg-white"});
-
-   
-
-     const processState = (data)=> {
-        
-        var clickAction = (!data.clicked) ? true : false;
-        var clickActionBG = (clickAction) ? "bg-green" : "bg-white";
-        var result = { 
-            clicked : clickAction,
-            class : clickActionBG
-        };
-        return result;
-
-     }
-      
-     const onClick = (e) => {
-
-        console.log("from child:")
+    const onClick = (e) => {
+        console.log('from child:')
         props.changeStateFromChild(e)
-        let r = processState(data);
-        updateState( r )
+        let r = processState(data)
+        updateState(r)
+    }
 
-      }
-
-    return( 
-        <div className={"outcome " + data.class} id={"outcome"+props.iden} onClick={onClick}>{props.element}</div>   
-        )    
+    return (
+        <div
+            className={'outcome ' + data.class}
+            id={'outcome' + props.iden}
+            onClick={onClick}
+        >
+            {props.element}
+        </div>
+    )
 }
 
 function getItemsToUpper(items = []) {
-    var result =     (items).map((i) => i.map(j => j.toUpperCase()));
-return result;     
+    var result = items.map((i) => i.map((j) => j.toUpperCase()))
+    return result
 }
 
-
 function GetOutcomes(items) {
-    let result = items.reduce((a, b) => a.reduce((r, v) => r.concat(b.map(w => [].concat(v, w))), []));
-    return result;
-
+    let result = items.reduce((a, b) =>
+        a.reduce((r, v) => r.concat(b.map((w) => [].concat(v, w))), [])
+    )
+    return result
 }
 
 class GetCount extends React.Component {
-   constructor(props){
-    super(props);
-    this.state = {
-        count: 0,
-    };                     }
-   
-
-
-    render(){
-
-        return (
-        <div>Count is {this.state.count}</div>
-         )
+    constructor(props) {
+        super(props)
+        this.state = {
+            count: 0,
         }
+    }
 
-        componentDidMount(){
-            let outcomes = document.querySelectorAll(".outcome");
-            let  count = outcomes.length;
-            this.setState({count : count})
-        }
+    render() {
+        return <div>Count is {this.state.count}</div>
+    }
 
-
-
-
-    
-    
+    componentDidMount() {
+        let outcomes = document.querySelectorAll('.outcome')
+        let count = outcomes.length
+        this.setState({ count: count })
+    }
 }
 
-setInterval(GetCount, 1000);
-
-
-export {ShowOutcomes, GetCount}
-
-
-
-
-
-
-
-
-
-
-
-
+export { ShowOutcomes, GetCount }
 
 // function GambleGame(){
 
@@ -157,7 +124,6 @@ export {ShowOutcomes, GetCount}
 //             <AddTeams/>
 
 //         </div>
-
 
 //     ) ;
 // }
@@ -182,20 +148,16 @@ export {ShowOutcomes, GetCount}
 
 //             <Teams submitTeams= {this.SetTeams}/>
 
-
 //         )
 //     }
-
 
 // }
 //     //adds arrays of [a,b] to main array
 //     //two inputs
 //     //allow blanks
-//     //if 
+//     //if
 
 //     //both inputs blanks
-   
-
 
 // class Teams extends React.Component() {
 
@@ -207,8 +169,8 @@ export {ShowOutcomes, GetCount}
 //             AwayTeam : ""
 //         }
 //     }
-  
-//     submitTeams = () => {   
+
+//     submitTeams = () => {
 //         let result = [];
 //         let home = this.state.HomeTeam.trim();
 //         let away = this.state.AwayTeam.trim();
@@ -239,15 +201,12 @@ export {ShowOutcomes, GetCount}
 //                     <button type="submit" onClick={this.submitTeams}></button>
 
 //                 </div>
-                
+
 //                 </>
 
-        
 //         )
 
-
 // }}
-
 
 // function Continue() {
 //     return  ;
